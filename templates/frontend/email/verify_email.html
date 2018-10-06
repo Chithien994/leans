@@ -1,0 +1,80 @@
+{% extends 'frontend/base.html' %}
+{% block title %}Verify Email{% endblock title %}
+{% block content %}
+
+    <div class="container">
+
+      <div class="row mt pd20">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 login-form verify-email">
+          <h2 class="form-heading"><div class="title">Verify Email</div><div class="blue-line"><div></div></div></h2>
+
+          <form action="" method="POST" id="verifyemailForm">
+          {% csrf_token %}
+          {% if verify_email_form.errors %}
+            {{ verify_email_form.errors }}
+          {% endif %}
+          <fieldset>
+            <div class="form-group">
+              <label class="font-normal">Enter your email to receive instructions</label>
+              <input id="id_email" class="text-input" name="email" type="email" placeholder="Email Address" >
+            </div>
+            <div class="space"></div>
+
+            <div class="clearfix button-group col-xs-12 col-lg-4 pull-right pdr0">
+
+              <button type="submit" class="width-60 pull-right btn btn-primary btn-big">
+                <span class="bigger-110">Verify email</span>
+              </button>
+            </div>
+
+            <div class="space-4"></div>
+          </fieldset>
+        </form>
+        </div><!--/col-lg-4 -->
+      </div><!-- /row -->
+    </div><!-- /container -->
+{% endblock %}
+
+{% block custom_script %}
+  <script>
+    jQuery(function($) {
+      $.validator.addMethod("withouSpace", function (value, element) {
+           return value.indexOf(" ") < 0 && value != "";
+      }, "Space is not allowed.");
+
+
+      $("#verifyemailForm").validate({
+        submitHandler: function(form) {
+            $.post('{% url 'verify_email' %}', $( "#verifyemailForm" ).serialize()).done(function(data){
+              toastr.success(data.msg);
+              setTimeout(function(){
+                window.location.href = '{% url 'frontend:home' %}';
+              }, 5000);
+
+            }).fail(function(data) {
+              toastr.error(data.responseJSON.msg);
+          }).always(function(){
+            // toastr.clear();
+          });
+            return false;
+        },
+        rules: {
+          email: {
+            required: true,
+            validemail: true,
+            email: true
+          }
+
+        },
+        messages: {
+            email: {
+              required: "Email is required.",
+              email: "Email is invalid."
+            }
+          }
+      });
+    });
+
+  </script>
+
+{% endblock %}

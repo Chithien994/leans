@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="{% block description %}{% endblock description %}" />
+    <link rel="shortcut icon" href="{% static "assets/images/overp-icon.png" %}">
+    <!-- Fonts from Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "assets/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/font-awesome.min.css" %}" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static "assets/css/fonts.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/main.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/login-responsive.css" %}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    {% block stylesheets %}
+  {% endblock %}
+  <style type="text/css">
+      {% block custom_css %}
+      {% endblock %}
+  </style>
+  </head>
+
+  <body>
+    <div id="wrapper">
+    {% block content %}
+  {% endblock %}
+  </div>
+  <footer class="container-fluid">
+    {% block copyright %}
+    <p class="centered copyright-text">
+      Copyright © 2018 EnglishBigger
+    </p>
+    {% endblock %}
+  </footer><!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "assets/js/jquery.validate.min.js" %}"></script>
+    <script src="{% static "assets/js/validators.js" %}"></script>
+    <script src="{% static "assets/js/jquery.placeholder.js" %}"></script>
+        <script type="text/javascript">
+          function showLoading(){
+            $('.loading_place').removeClass('hide');
+
+          }
+
+          function hideLoading(){
+             $('.loading_place').addClass('hide');
+          }
+
+          $(function(){
+            toastr.options = {
+              "closeButton": true,
+              "debug": false,
+              "newestOnTop": false,
+              "progressBar": true,
+              "positionClass": "toast-top-right",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "5000",
+              "timeOut": "5000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+
+          });
+        </script>
+  {% block javascripts %}
+    <script type="text/javascript">
+      $(function(){
+        $('input').placeholder({ customClass: 'custom-placeholder' });
+      })
+    </script>
+  {% endblock %}
+  {% block custom_script %}
+  {% endblock %}
+  <div class="loading_place hide">
+    <img src="{% static "assets/images/loading.gif" %}" />
+  </div>
+  </body>
+</html>
+

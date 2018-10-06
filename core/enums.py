@@ -1,0 +1,18 @@
+
+from enum import Enum
+
+
+class StatusCode(Enum):
+    PHONE_NUMBER_IS_INVALID     = 111
+    PASSWORD_IS_INVALID         = 112
+    EMAIL_ADDRESS_IS_EMPTY      = 113
+    EMAIL_ADDRESS_IS_INVALID    = 114
+    EMAIL_ADDRESS_IS_EXISTS     = 115
+    FIRST_NAME_IS_EMPTY         = 116
+    LAST_NAME_IS_EMPTY          = 117
+    USER_ID_IS_INVALID          = 118
+    NEW_PASSWORD_IS_INVALID     = 119
+    OLD_PASSWORD_IS_INVALID     = 120
+    ACCESS_TOKEN_FB_IS_INVALID  = 121
+    USERNAME_IS_INVALID         = 122
+    
